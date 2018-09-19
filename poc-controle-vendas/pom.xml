@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ahorasw</groupId>
-	<artifactId>ControleVendas</artifactId>
+	<artifactId>poc-controle-vendas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>ControleVendas</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Poc - Controle de Vendas</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

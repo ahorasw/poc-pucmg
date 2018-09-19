@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ahorasw.poc</groupId>
-	<artifactId>FornecedorStub</artifactId>
+	<artifactId>poc-fornecedor-stub</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>FornecedorStub</name>
-	<description>POC - Fornecedor Teste</description>
+	<description>POC - Fornecedor STUB - Testes</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

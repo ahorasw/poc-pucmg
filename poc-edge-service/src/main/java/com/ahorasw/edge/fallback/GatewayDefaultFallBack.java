@@ -1,4 +1,4 @@
-package com.ahorasw.edge;
+package com.ahorasw.edge.fallback;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

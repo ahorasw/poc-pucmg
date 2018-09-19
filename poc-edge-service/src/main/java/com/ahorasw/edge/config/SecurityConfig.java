@@ -1,4 +1,4 @@
-package com.ahorasw.edge;
+package com.ahorasw.edge.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
