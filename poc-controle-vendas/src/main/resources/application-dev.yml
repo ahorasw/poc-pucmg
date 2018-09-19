@@ -1,0 +1,9 @@
+spring:
+      datasource:
+             url: jdbc:postgresql://localhost:5432/pocdb
+             username: pocuser
+             password: pocpass
+             
+server: 
+    port: 8020
+              

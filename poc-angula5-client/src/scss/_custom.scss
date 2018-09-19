@@ -1,0 +1,63 @@
+// Here you can add other styles
+
+.page-header {
+  padding: $spacer 0;
+  background: $breadcrumb-bg;
+  border-bottom: 1px solid $border-color;
+
+  h1 {
+    margin: 0;
+  }
+
+
+  .chart-wrapper {
+    max-width: 140px;
+    margin: 0 auto;
+    overflow: visible;
+  }
+
+  .charts .title {
+    margin-top: 2px;
+  }
+}
+.header-fixed .app-body{
+  margin-top: 120px;  
+}
+
+.app-footer{
+  background-color: #ffffffb3;
+}
+
+.app-header.navbar{
+  height: 120px;
+  background-image: url('../img/logo.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 150%;  
+  background-color: #0e111f;
+
+}
+
+.sidebar {
+  .sidebar-header {
+
+    .img-avatar {
+      width: 80px;
+      margin: 20px auto 10px;
+      border-radius: 50em;
+    }
+
+    > .btn-group {
+      margin-top: 10px;
+    }
+
+    .btn-link {
+      color: $text-muted;
+
+      &:hover {
+        color: $sidebar-color;
+        text-decoration: none;
+      }
+    }
+  }
+}

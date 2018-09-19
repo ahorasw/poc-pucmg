@@ -1,0 +1,11 @@
+    
+logging:
+    level:
+      root: ERROR
+      
+spring:
+   datasource:
+         platform: POSTGRESQL
+   jpa:
+      properties: 
+          hibernate.default_schema: poc
