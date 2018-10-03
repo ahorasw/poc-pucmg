@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ahorasw.controlevendas.domain.Avaliacao;
+import com.ahorasw.controlevendas.model.Avaliacao;
 
 public interface AvaliacaoProdutoRepository extends JpaRepository<Avaliacao, Integer> {
 

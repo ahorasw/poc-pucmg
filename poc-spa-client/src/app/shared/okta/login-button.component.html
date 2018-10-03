@@ -1,0 +1,11 @@
+<button routerLink="/" type="button" class="btn btn-secondary"
+*ngIf="!isAuthenticated"
+    (click)="oktaAuth.loginRedirect(url)" 
+    [routerLink]="['/']"
+>Login</button>
+
+<button routerLink="/" type="button" class="btn btn-secondary"
+    *ngIf="isAuthenticated"
+    (click)="oktaAuth.logout()" 
+    [routerLink]="['/']"
+>Logout</button>

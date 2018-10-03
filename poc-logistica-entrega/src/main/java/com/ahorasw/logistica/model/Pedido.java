@@ -2,6 +2,7 @@ package com.ahorasw.logistica.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,44 +18,45 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "pedido", schema="poc")
-@SequenceGenerator(name="pedido_seq", sequenceName="poc.pedido_generator" ) 
+@SequenceGenerator(name="pedido_seq", sequenceName="poc.pedido_sequence", allocationSize = 1, initialValue = 1 ) 
 public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedido_seq")
-    private Integer    idPedido;
-    private String     idUsuario;
-    private String     destinatario;
-    private String     endereco;    
+	@GeneratedValue(generator = "pedido_seq")
+    private Integer    id;
+	
+    private String    idusuario;
     private Integer    status;
-    private String     codPagamento;    
+    private String     enderecoEntrega;
+    private String     destinatario;
+    private Date       dataPedido;
+    private Double     valorTotal;
 
     @OneToMany(fetch = FetchType.EAGER,orphanRemoval=true,cascade=CascadeType.ALL)
-    @JoinColumn(name = "idPedido", nullable = false)
+    @JoinColumn(name = "idpedido", nullable = false, insertable=false, updatable=false)
     private List<ItemPedido> itens = new ArrayList();
 
     public Pedido() {
 		super();
     }
 
-	
-	public Integer getIdPedido() {
-		return idPedido;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdPedido(Integer idPedido) {
-		this.idPedido = idPedido;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getIdUsuario() {
-		return idUsuario;
+	public String getIdusuario() {
+		return idusuario;
 	}
 
-	public void setIdUsuario(String idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setIdusuario(String idusuario) {
+		this.idusuario = idusuario;
 	}
 
 	public Integer getStatus() {
@@ -66,44 +68,48 @@ public class Pedido implements Serializable {
 	}
 
 
-	public List<ItemPedido> getItens() {
-		return itens;
+
+	public String getEnderecoEntrega() {
+		return enderecoEntrega;
 	}
 
+	public void setEnderecoEntrega(String enderecoEntrega) {
+		this.enderecoEntrega = enderecoEntrega;
+	}
 
 	public String getDestinatario() {
 		return destinatario;
 	}
 
-
 	public void setDestinatario(String destinatario) {
 		this.destinatario = destinatario;
 	}
 
-
-	public String getEndereco() {
-		return endereco;
+	public Date getDataPedido() {
+		return dataPedido;
 	}
 
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setDataPedido(Date dataPedido) {
+		this.dataPedido = dataPedido;
 	}
 
-
-	public String getCodPagamento() {
-		return codPagamento;
+	public Double getValorTotal() {
+		return valorTotal;
 	}
 
-
-	public void setCodPagamento(String codPagamento) {
-		this.codPagamento = codPagamento;
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 
+	public List<ItemPedido> getItens() {
+		return itens;
+	}
 
 	public void setItens(List<ItemPedido> itens) {
 		this.itens = itens;
 	}
+
+	
 
 
 }

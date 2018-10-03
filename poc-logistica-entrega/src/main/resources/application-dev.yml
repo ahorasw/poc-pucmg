@@ -1,0 +1,11 @@
+spring:
+      datasource:
+             url: jdbc:postgresql://localhost:5432/pocdb
+             username: pocuser
+             password: pocpass
+             
+
+eureka:
+  instance:
+    hostname: localhost
+    non-secure-port: 8761                                    

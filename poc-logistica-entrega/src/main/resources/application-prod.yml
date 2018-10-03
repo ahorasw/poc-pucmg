@@ -1,0 +1,23 @@
+spring:
+      datasource:
+             url: jdbc:postgresql://pocdb.crz3ewynjcue.sa-east-1.rds.amazonaws.com:5432/pocdb
+             username: pocuser
+             password: pocdbpass
+             
+
+eureka:
+  instance:
+    hostname: ip-172-31-11-114.sa-east-1.compute.internal
+    non-secure-port: 8761                      
+             
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    com.ahorasw.controlevendas: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file: /tmp/logistica/logistica.log                    
+
+              

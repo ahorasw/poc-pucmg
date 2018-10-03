@@ -3,6 +3,7 @@ package com.ahorasw.edge;
 
 
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.springframework.boot.SpringApplication;
@@ -34,7 +35,8 @@ public class GatewayApplication {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        //config.setAllowedOrigins(Collections.singletonList("*"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "https://www.ahorasw.rocks", "https://ahorasw.rocks"));
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowedHeaders(Collections.singletonList("*"));
         source.registerCorsConfiguration("/**", config);

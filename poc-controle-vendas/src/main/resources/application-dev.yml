@@ -4,6 +4,7 @@ spring:
              username: pocuser
              password: pocpass
              
-server: 
-    port: 8020
-              
+eureka:
+  instance:
+    hostname: localhost
+    non-secure-port: 8762             

@@ -1,0 +1,60 @@
+
+    
+okta:
+  client:
+    orgUrl: https://dev-549303.oktapreview.com
+  oauth2:
+    issuer: https://dev-549303.oktapreview.com/oauth2/default
+    audience: api://default
+    clientId: 0oaga21b914tHUklJ0h7
+    rolesClaim: groups
+    redirectUri: /authorization-code/callback      
+    
+    
+spring:
+  application:
+    name: zuul
+
+eureka:
+  instance:
+    hostname: ip-172-31-11-114.sa-east-1.compute.internal
+    non-secure-port: 8761
+
+server: 
+    port: 80
+ 
+zuul:
+  prefix: /api
+  ignored-services: '/api/*'
+  routes:
+    logistica:
+      path: /logistica/**
+      serviceId: logistica
+      strip-prefix: true
+    vendas: 
+      path: /vendas/**
+      serviceId: vendas
+      strip-prefix: true
+              
+              
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    com.ahorasw.controlevendas: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file: /tmp/edge-server/edge-server.log
+
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          okta:
+#            client-id: 0oafzcx9d0qPKb0Ni0h7
+#            scope: openid email profile
+#        provider:
+#          okta:
+#            issuer-uri: https://dev-737523.oktapreview.com/oauth2/default

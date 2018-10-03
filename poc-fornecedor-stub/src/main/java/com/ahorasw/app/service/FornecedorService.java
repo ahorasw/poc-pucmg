@@ -45,6 +45,17 @@ public class FornecedorService {
 
 		return pedido.get();
 	}
+	
+	public List<Pedido> consultaAllPedido() throws Exception{
+		List<Pedido> pedidos = repository.findAll();
+		
+		if(pedidos == null || pedidos.size()==0) {
+			throw new Exception("Ordem de Entrega nao Cadastrada!");
+		}
+
+		return pedidos;
+	}	
+	
 	public Pedido atualizarOrdemEntrega(Pedido ordemEntrega) throws Exception{
 		Optional<Pedido> pedido = repository.findOneByIdOEParceiro(ordemEntrega.getIdOEParceiro());
 		
@@ -76,6 +87,23 @@ public class FornecedorService {
 
 		repository.delete(pedido.get());
 	}
+	
+	public void atualizaStatusPedido(Integer idOrdemEntrega, Integer status) throws Exception{
+		Optional<Pedido> pedido = repository.findOneByIdOEParceiro(idOrdemEntrega);
+		
+		
+		if(!pedido.isPresent()) {
+			throw new Exception("Ordem de Entrega nao Cadastrada!");
+		}	
+
+		if(pedido.get().getStatus() > status)
+			throw new Exception("Status da Entrega nao pode ser alterada!");
+			
+		pedido.get().setStatus(status);
+		
+		repository.save(pedido.get());
+	}
+	
 	
 	@Scheduled(fixedDelay = 60000, initialDelay = 60000)
 	public void atualizarPedidos(){

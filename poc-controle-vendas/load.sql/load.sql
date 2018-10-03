@@ -5,7 +5,7 @@ CREATE SEQUENCE poc.arquivos_midia_sequence START 1;
 CREATE SEQUENCE poc.avaliacao_sequence START 1;
 CREATE SEQUENCE poc.fornecedor_sequence START 1;
 CREATE SEQUENCE poc.pedido_sequence START 1;
-
+CREATE SEQUENCE poc.ordem_entrega_sequence START 1;
 --********************8
 --      FORNECEDOR
 --********************8
@@ -259,3 +259,118 @@ insert into poc.arquivosmidia (id, tipo, uri, idproduto, sequencia) values
 (3, 1, 'https://www.gettyimages.pt/detail/foto/guitar-against-white-background-imagem-royalty-free/674496725', 2, 1),
 (2, 1, 'https://www.gettyimages.pt/detail/foto/guitar-against-white-background-imagem-royalty-free/913931098', 3, 1);
 
+
+
+- Table: poc.pedido
+
+-- DROP TABLE poc.pedido;
+
+CREATE TABLE poc.pedido
+(
+  id integer NOT NULL,
+  idusuario character varying(80) NOT NULL,
+  status integer,
+  destinatario character varying(200) NOT NULL,
+  endereco_entrega character varying(200) NOT NULL,
+  valor_total numeric(15,2),
+  data_pedido integer
+ 
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE poc.pedido
+  OWNER TO postgres;
+GRANT ALL ON TABLE poc.pedido TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE poc.pedido TO public;
+
+-- Index: poc.xpkpedido
+
+-- DROP INDEX poc.xpkpedido;
+
+CREATE UNIQUE INDEX xpkpedido
+  ON poc.pedido
+  USING btree
+  (id);
+
+-- Table: poc.itempedido
+
+-- DROP TABLE poc.item_pedido;
+
+CREATE TABLE poc.item_pedido
+(
+  idproduto integer NOT NULL,
+  quantidade integer,
+  idpedido integer NOT NULL
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE poc.item_pedido
+  OWNER TO postgres;
+GRANT ALL ON TABLE poc.item_pedido TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE poc.item_pedido TO public;
+
+-- Index: poc.xpkitempedido
+
+-- DROP INDEX poc.xpkitempedido;
+
+CREATE UNIQUE INDEX xpkitempedido
+  ON poc.item_pedido
+  USING btree
+  (idproduto, idpedido);
+
+
+--DROP TABLE poc.ordem_entrega;
+-- Table: poc.ordementrega
+
+-- DROP TABLE poc.ordem_entrega;
+
+CREATE TABLE poc.ordem_entrega
+(
+  id integer NOT NULL,
+  idfornecedor integer NOT NULL,
+  idpedido integer NOT NULL,
+  destinatario character varying(200) NOT NULL,
+  endereco_entrega character varying(200) NOT NULL,
+  codrastreamento character varying(50),
+  status integer
+
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE poc.ordem_entrega
+  OWNER TO postgres;
+GRANT ALL ON TABLE poc.ordem_entrega TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE poc.ordem_entrega TO public;
+
+-- Index: poc.xpkordem_de_entrega
+
+-- DROP INDEX poc.xpkordem_de_entrega;
+
+CREATE UNIQUE INDEX xpkordem_de_entrega
+  ON poc.ordem_entrega
+  USING btree
+  (id);
+
+
+
+CREATE TABLE poc.item_ordem_entrega
+(
+  idproduto integer NOT NULL,
+  quantidade integer,
+  idordem integer NOT NULL
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE poc.item_ordem_entrega
+  OWNER TO postgres;
+GRANT ALL ON TABLE poc.item_ordem_entrega TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE poc.item_ordem_entrega TO public;
+
+CREATE UNIQUE INDEX xpkitem_ordem_entrega
+  ON poc.item_ordem_entrega
+  USING btree
+  (idordem, idproduto);

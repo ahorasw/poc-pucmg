@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.ahorasw.controlevendas.domain.Endereco;
-import com.ahorasw.controlevendas.domain.Usuario;
+import com.ahorasw.controlevendas.model.Endereco;
+import com.ahorasw.controlevendas.model.Usuario;
 import com.ahorasw.controlevendas.repository.EnderecoRepository;
 import com.ahorasw.controlevendas.repository.UsuarioRepository;
 

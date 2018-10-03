@@ -1,4 +1,4 @@
-package com.ahorasw.logistica.model;
+ package com.ahorasw.logistica.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -15,14 +15,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "produto", schema="poc")
-@SequenceGenerator(name="produto_seq", sequenceName="poc.produto_generator" ) 
 public class Produto implements Serializable {
 	
     private static final long serialVersionUID = 2L;
     
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produto_seq")
-    @Column(name = "idproduto", updatable = false, nullable = false)
 	private Integer id;
 
     private String nome;
@@ -102,6 +99,16 @@ public class Produto implements Serializable {
 
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
+	}
+
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
 	}
 
 }

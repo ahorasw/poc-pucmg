@@ -13,33 +13,29 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "fornecedor", schema="poc")
-@SequenceGenerator(name="fornecedor_seq", sequenceName="poc.fornecedor_generator" ) 
 public class Fornecedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fornecedor_seq")
-    private Integer    idfornecedor;
+    private Integer    id;
     private String     nome;
-    private Integer    cnpj;
-    private String     urlsite;
-    private Integer    versaoapi;
+    private Long       cnpj;
+    private String     urlSite;
+    private Integer    versaoApi;
 
     public Fornecedor() {
 		super();
     }
     
 
-    @OneToMany(mappedBy="fornecedor")
-    private Set<Produto> produtos;
     
-	public Integer getIdfornecedor() {
-		return idfornecedor;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdfornecedor(Integer idfornecedor) {
-		this.idfornecedor = idfornecedor;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -50,28 +46,40 @@ public class Fornecedor implements Serializable {
 		this.nome = nome;
 	}
 
-	public Integer getCnpj() {
+
+
+	public Long getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(Integer cnpj) {
+
+
+	public void setCnpj(Long cnpj) {
 		this.cnpj = cnpj;
 	}
 
-	public String getUrlsite() {
-		return urlsite;
+
+
+	public String getUrlSite() {
+		return urlSite;
 	}
 
-	public void setUrlsite(String urlsite) {
-		this.urlsite = urlsite;
+
+
+	public void setUrlSite(String urlSite) {
+		this.urlSite = urlSite;
 	}
 
-	public Integer getVersaoapi() {
-		return versaoapi;
+
+
+	public Integer getVersaoApi() {
+		return versaoApi;
 	}
 
-	public void setVersaoapi(Integer versaoapi) {
-		this.versaoapi = versaoapi;
+
+
+	public void setVersaoApi(Integer versaoApi) {
+		this.versaoApi = versaoApi;
 	}
 
 

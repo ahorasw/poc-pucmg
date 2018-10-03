@@ -10,6 +10,7 @@ okta:
     rolesClaim: groups
     redirectUri: /authorization-code/callback      
     
+    
 spring:
   application:
     name: zuul
@@ -39,7 +40,12 @@ zuul:
 
 logging:
   level:
-    root: INFO    
+    org.springframework.web: ERROR
+    com.ahorasw.controlevendas: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file: ./edge-server.log
 
 #spring:
 #  security:

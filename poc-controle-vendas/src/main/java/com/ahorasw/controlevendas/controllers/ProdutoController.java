@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.ahorasw.controlevendas.domain.Produto;
+import com.ahorasw.controlevendas.model.Produto;
 import com.ahorasw.controlevendas.service.ProdutoService;
 
 
@@ -55,7 +55,7 @@ public class ProdutoController {
 
     }
 
-    @RequestMapping(value="/produto", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/adm/produto", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Produto> insert(@RequestBody Produto dto){
     	log.debug("insert produto executado");
         
@@ -67,7 +67,7 @@ public class ProdutoController {
     }
     
 
-    @RequestMapping(value="/produto", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/adm/produto", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Produto> update(@RequestBody Produto dto){
     	log.debug("update produto executado");
     	Optional<Produto> produto = produtoService.atualizaProduto(dto);
@@ -78,7 +78,7 @@ public class ProdutoController {
     }
     
 
-    @RequestMapping(value="/produto/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value="/adm/produto/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") int id){
        log.debug("delete produto executado");
 

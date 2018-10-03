@@ -11,6 +11,7 @@ import com.ahorasw.logistica.model.OrdemEntrega;
 @Repository
 public interface OrdemEntregaRepository  extends JpaRepository<OrdemEntrega, Integer> {
 	
+    OrdemEntrega findOneById(Integer id);
     List<OrdemEntrega> findAllByStatus(Integer status);
     List<OrdemEntrega> findAllByIdfornecedor(Integer idfornecedor);
     List<OrdemEntrega> findAllByIdpedido(Integer idpedido);
