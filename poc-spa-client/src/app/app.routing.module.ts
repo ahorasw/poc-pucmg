@@ -9,6 +9,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import {
     OktaAuthGuard, OktaCallbackComponent
   } from '@okta/okta-angular';
+import { FinalizadoComponent } from './finalizado/finalizado.component';
 
 const routes: Routes = [
     {
@@ -31,6 +32,10 @@ const routes: Routes = [
     {
         path: 'implicit/callback',
         component: OktaCallbackComponent
+    },
+    {
+        path: 'finalizado/:id', 
+        component: FinalizadoComponent
     },
     {
         path: '**', 

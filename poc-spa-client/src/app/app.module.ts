@@ -15,6 +15,7 @@ import {
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/okta/auth.interceptor';
 import { LoginButtonComponent } from './shared/okta/login-button.component';
+import { FinalizadoModule } from './finalizado/finalizado.module';
 
 registerLocaleData(ptBr)
 
@@ -36,6 +37,7 @@ const oktaConfig = {
     ErrorsModule,
     CartModule,
     CheckoutModule,
+    FinalizadoModule
     OktaAuthModule.initAuth(oktaConfig)
   ],
   providers: [

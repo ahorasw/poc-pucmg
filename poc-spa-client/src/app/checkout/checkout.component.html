@@ -23,12 +23,12 @@
     </div>
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Endereco de Entrega</h4>
-      <form [formGroup]="myForm" (onSubmit)="pagar()">
+      <form [formGroup]="myForm" (ngSubmit)="pagar()">
         
         
         <div class="mb-3">
             <label for="name">Nome Completo</label>
-            <input type="text" class="form-control" id="name" placeholder="Nome" required [formControl] = "myForm.controls['destinatario']"/>
+            <input type="text" class="form-control" id="name" placeholder="Nome" required formControlName="destinatario"/>
             <div class="invalid-feedback">
               Nome válido requerido.
             </div>
@@ -36,7 +36,7 @@
 
         <div class="mb-3">
           <label for="email">E-mail <span class="text-muted"></span></label>
-          <input type="email" class="form-control" id="email" placeholder="you@example.com" required [formControl] = "myForm.controls['email']"/>
+          <input type="email" class="form-control" id="email" placeholder="you@example.com" required formControlName="email"/>
           <div class="invalid-feedback">
             Por favor informar um e-mail correto!
           </div>
@@ -44,11 +44,12 @@
 
         <div class="mb-3">
           <label for="address">Endereço</label>
-          <input type="text" class="form-control" id="address" placeholder="Rua seu endereço, 123" required [formControl] = "myForm.controls['enderecoEntrega']"/>
+          <input type="text" class="form-control" id="address" placeholder="Rua seu endereço, 123" required formControlName="enderecoEntrega"/>
           <div class="invalid-feedback">
             Por favor informe o endereco de entrega.
           </div>
         </div>
+
 
         <!--
         <div class="row">
