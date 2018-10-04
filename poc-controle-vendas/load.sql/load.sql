@@ -26,6 +26,18 @@ CREATE SEQUENCE poc.avaliacao_sequence START 1;
 CREATE SEQUENCE poc.fornecedor_sequence START 1;
 CREATE SEQUENCE poc.pedido_sequence START 1;
 CREATE SEQUENCE poc.ordem_entrega_sequence START 1;
+
+
+GRANT USAGE ON SEQUENCE poc.produto_sequence TO public;
+GRANT USAGE ON SEQUENCE poc.endereco_sequence TO public;
+GRANT USAGE ON SEQUENCE poc.produto_sequence TO public;
+GRANT USAGE ON SEQUENCE poc.item_pedido_sequence TO public;
+GRANT USAGE ON SEQUENCE poc.arquivos_midia_sequence TO public;
+GRANT USAGE ON SEQUENCE poc.avaliacao_sequence TO public;
+GRANT USAGE ON SEQUENCE poc.fornecedor_sequence TO public;
+GRANT USAGE ON SEQUENCE poc.pedido_sequence TO public;
+GRANT USAGE ON SEQUENCE poc.ordem_entrega_sequence TO public;
+
 --********************8
 --      FORNECEDOR
 --********************8
@@ -53,8 +65,8 @@ CREATE UNIQUE INDEX xpkfornecedor
 
 --INSERT DADOS INICIAIS
 insert into poc.fornecedor (id, nome, cnpj, url_site, versao_api) values 
-(1, 'Jibson s.a', 123567232000101, 'http://localhost:10001/api/', 1),
-(2, 'Femder s.a', 125422722233101, 'http://localhost:10011/api/', 1);
+(1, 'Jibson s.a', 123567232000101, 'http://localhost:10001/api/fornecedor', 1),
+(2, 'Femder s.a', 125422722233101, 'http://localhost:10011/api/fornecedor', 1);
 
 
 --********************8
@@ -93,9 +105,9 @@ CREATE UNIQUE INDEX xpkusuario
 
 --INSERT DADOS INICIAIS  
 insert into poc.usuario (id, email, perfil, responsavel) values 
-('admin', 'pocadm092018@gmail.com', 'admin', null),
-('ahoras', 'ahoras@gmail.com', 'admin', null),
-('userweb', 'pocuser092018@gmail.com', 'userweb', null);
+('pocadm092018@gmail.com', 'pocadm092018@gmail.com', 'admin', null),
+('ahoras@gmail.com', 'pocuser092018@gmail.com', 'admin', null),
+('pocuser092018@gmail.com', 'pocuser092018@gmail.com', 'userweb', null);
 
 
 
@@ -297,7 +309,7 @@ CREATE TABLE poc.pedido
   destinatario character varying(200) NOT NULL,
   endereco_entrega character varying(200) NOT NULL,
   valor_total numeric(15,2),
-  data_pedido integer
+  data_pedido date
  
 )
 WITH (

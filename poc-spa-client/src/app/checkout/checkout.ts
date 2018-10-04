@@ -7,7 +7,7 @@ export class Checkout {
     codPromocial: string;
     salvarEndereo: string;
     email: string;
-    itens: Product[];
+    items: Product[];
 }
 
 export interface CheckoutRetorno {

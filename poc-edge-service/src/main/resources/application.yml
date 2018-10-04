@@ -35,6 +35,7 @@ zuul:
       path: /vendas/**
       serviceId: vendas
       strip-prefix: true
+      sensitiveHeaders: Cookie,Set-Cookie,Authorization
               
               
 

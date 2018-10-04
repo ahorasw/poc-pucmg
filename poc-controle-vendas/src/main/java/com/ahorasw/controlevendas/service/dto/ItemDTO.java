@@ -9,14 +9,15 @@ public class ItemDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = -3734498082532994693L;
 	
-	private Integer idProduto;
+	private Integer id;
 	private String  descricao;
 	private Integer quantidade;
-	public Integer getIdProduto() {
-		return idProduto;
+
+	public Integer getId() {
+		return id;
 	}
-	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getDescricao() {
 		return descricao;

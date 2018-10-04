@@ -4,9 +4,9 @@ import { Observable, from } from 'rxjs';
 import { OktaAuthService } from '@okta/okta-angular';
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class ApiInterceptor implements HttpInterceptor {
 
-  constructor(private oktaAuth: OktaAuthService) {
+  constructor() {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -14,16 +14,15 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
-    // Only add to known domains since we don't want to send our tokens to just anyone.
-    // Also, Giphy's API fails when the request includes a token.
-    if (request.urlWithParams.indexOf('localhost') > -1) {
-      const accessToken = await this.oktaAuth.getAccessToken();
-      request = request.clone({
-        setHeaders: {
-          Authorization: 'Bearer ' + accessToken
-        }
-      });
+
+    console.log("PASSOU NO HANDLE API");
+    //const baseUrl = 'http://localhost:9020';
+    const baseUrl = 'https://api.ahorasw.rocks';
+    if (request.urlWithParams.indexOf('/api') > -1) {
+        request = request.clone({
+            url: baseUrl + request.url
+        });
     }
     return next.handle(request).toPromise();
-  }
+  }  
 }

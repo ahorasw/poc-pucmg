@@ -5,6 +5,7 @@ import { CartService } from '../cart/cart.service';
 import { Checkout, CheckoutRetorno } from './checkout'
 import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
 import { CheckoutService } from './checkout.service';
+import { OktaAuthService } from '@okta/okta-angular';
 
 
 
@@ -19,7 +20,9 @@ export class CheckoutComponent implements OnInit {
   produtos: Product[];
 
   constructor(
-    private cartService: CartService, private fb: FormBuilder, 
+    public cartService: CartService, 
+    private oktaAuth: OktaAuthService, 
+    private fb: FormBuilder, 
     private checkoutService: CheckoutService,
     private router: Router
     ){}    
@@ -27,7 +30,7 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
 
     this.produtos = this.cartService.obterProdutos();
-    this.checkout.itens = this.produtos;
+    this.checkout.items = this.produtos;
 
     this.myForm = this.fb.group({
       destinatario : ['', [Validators.required]],
@@ -38,25 +41,33 @@ export class CheckoutComponent implements OnInit {
 
   pagar() {
 
-    this.checkout.destinatario = this.myForm.value.destinatario;
-    this.checkout.enderecoEntrega = this.myForm.value.enderecoEntrega;
-    this.checkout.email = this.myForm.value.email;
-    this.checkout.codPromocial = '';
-    this.checkout.salvarEndereo = '';
-    console.log('eita ta indo pagar');
-    console.log( this.checkout);
-    this.checkoutService
-      .efetivarPagamento(this.checkout)
-      .subscribe(
-        (res: CheckoutRetorno) => {
-          this.router.navigateByUrl('finalizado/' + res.id);
-          this.cartService.esvaziarCarrinho();
-        },
-        err => {
-          console.log(err)
-          alert('sistema indisponivel no momento!');
-        }
-      );
+    this.oktaAuth.getUser().then((user) => {
+      // Got user
+      this.checkout.destinatario = this.myForm.value.destinatario;
+      this.checkout.enderecoEntrega = this.myForm.value.enderecoEntrega;
+      this.checkout.email = this.myForm.value.email;
+      this.checkout.codPromocial = '';
+      this.checkout.salvarEndereo = '';
+      this.checkout.userId = user.email;
+      console.log('eita ta indo pagar:'+this.oktaAuth.getUser.name);
+
+      console.log( this.checkout);
+      this.checkoutService
+        .efetivarPagamento(this.checkout)
+        .subscribe(
+          (res: CheckoutRetorno) => {
+            this.router.navigateByUrl('finalizado/' + res.id);
+            this.cartService.esvaziarCarrinho();
+          },
+          err => {
+            console.log(err)
+            
+            alert('Erro na efivacao do Pedido! \n'+err.error.message);
+          }
+        );
+  
+    });
+
       
 
   }

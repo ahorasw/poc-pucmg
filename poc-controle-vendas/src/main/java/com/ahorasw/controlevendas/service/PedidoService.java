@@ -112,11 +112,11 @@ public class PedidoService {
 		if(isEfetivacao) {
 			if(dto.getUserId()==null)
 				erros.add("Usuario nao informado");
-	
-			Optional<Usuario> usuario = usuarioReporitory.findOneById(dto.getUserId());
-			if(!usuario.isPresent())
-				erros.add("Usuario nao cadatrado!");
-
+			else {
+				Optional<Usuario> usuario = usuarioReporitory.findOneById(dto.getUserId());
+				if(!usuario.isPresent())
+					erros.add("Usuario nao cadastrado!");
+			}
 			if(dto.getDestinatario()==null)
 				erros.add("Destinatario nao informado");
 			
@@ -127,16 +127,19 @@ public class PedidoService {
 		//if(!endereco.isPresent())
 		//	erros.add("Endereco nao cadatrado!");
 		
+		if(!erros.isEmpty())
+			//TO-DO:
+			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, erros.toString()); 
 		
 		Double valorTotal = 0.0;
 		for(ItemDTO item : dto.getItems()){
-			Optional<Produto> produto = produtoReporitory.findOneById(item.getIdProduto());
+			Optional<Produto> produto = produtoReporitory.findOneById(item.getId());
 			
 			if(item.getQuantidade()==null || item.getQuantidade()==0)
-				erros.add("Quantidade do produto nao informada: "+item.getIdProduto());
+				erros.add("Quantidade do produto nao informada: "+item.getId());
 			
 			if(!produto.isPresent())
-				erros.add("Produto nao cadatrado: cod:"+item.getIdProduto());
+				erros.add("Produto nao cadastrado: cod:"+item.getId());
 			else
 				valorTotal += produto.get().getValor()*item.getQuantidade();
 		}
@@ -168,7 +171,7 @@ public class PedidoService {
 		repository.save(pedido);
 		
 		for(ItemDTO itemDTO : dto.getItems()){
-			Optional<Produto> produto = produtoReporitory.findOneById(itemDTO.getIdProduto());
+			Optional<Produto> produto = produtoReporitory.findOneById(itemDTO.getId());
 			ItemPedido item = new ItemPedido();
 			item.setQuantidade(itemDTO.getQuantidade());
 			item.getPk().setPedido(pedido);

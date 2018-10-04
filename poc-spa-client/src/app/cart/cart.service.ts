@@ -55,7 +55,7 @@ export class CartService{
       }
     });
     
-    if(found==true){
+    if(found != undefined){
       this.produtos[indexFound].quantidade -=1;
 
       if(this.produtos[indexFound].quantidade == 0)

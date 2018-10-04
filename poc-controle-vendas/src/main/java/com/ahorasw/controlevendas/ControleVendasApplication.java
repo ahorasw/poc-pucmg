@@ -22,13 +22,13 @@ public class ControleVendasApplication {
 		SpringApplication.run(ControleVendasApplication.class, args);
 	}
 
-    @Bean
+/*    @Bean
     public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         //config.setAllowedOrigins(Collections.singletonList("*"));
-        config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "https://www.ahorasw.rocks", "https://ahorasw.rocks"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:8008", "https://www.ahorasw.rocks", "https://ahorasw.rocks"));
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowedHeaders(Collections.singletonList("*"));
         source.registerCorsConfiguration("/**", config);
@@ -36,6 +36,6 @@ public class ControleVendasApplication {
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
     }
-
+*/
 }
 
