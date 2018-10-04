@@ -14,11 +14,11 @@ okta:
 spring:
   application:
     name: zuul
-
+    
 eureka:
-  instance:
-    hostname: ip-172-31-11-114.sa-east-1.compute.internal
-    non-secure-port: 8761
+  client:
+    serviceUrl:
+      defaultZone: http://ip-172-31-11-114.sa-east-1.compute.internal:8761/eureka/      
 
 server: 
     port: 80
@@ -35,6 +35,8 @@ zuul:
       path: /vendas/**
       serviceId: vendas
       strip-prefix: true
+      
+      
               
               
 

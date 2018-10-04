@@ -20,7 +20,7 @@ registerLocaleData(ptBr)
 
 const oktaConfig = {
   issuer: 'https://dev-549303.oktapreview.com/oauth2/default',
-  redirectUri: 'http://localhost:4200/implicit/callback',
+  redirectUri: 'https://www.ahorasw.rocks/implicit/callback',
   clientId: '0oaga21b914tHUklJ0h7'
 }
 

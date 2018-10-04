@@ -16,9 +16,9 @@ spring:
     name: zuul
 
 eureka:
-  instance:
-    hostname: localhost
-    non-secure-port: 8761
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/  
 
 server: 
     port: 9020

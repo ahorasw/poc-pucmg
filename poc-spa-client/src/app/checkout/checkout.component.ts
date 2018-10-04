@@ -15,7 +15,7 @@ export class CheckoutComponent implements OnInit {
   myForm : FormGroup;
   checkout: Checkout;
   produtos: Product[];
-  constructor(private cartService: CartService, fb: FormBuilder){
+  constructor(public cartService: CartService, fb: FormBuilder){
     this.myForm= fb.group({
         'destinatario' : ['', [Validators.required]],
         'email' : ['', [Validators.required]],
@@ -23,8 +23,6 @@ export class CheckoutComponent implements OnInit {
         'codPromocial' : [''],
         'salvarEndereo' : ['']
       });
-
-      this.checkout = new Checkout();
   }    
 
   ngOnInit() {

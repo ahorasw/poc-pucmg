@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let produto of produtos">
-        <td style="max-width: 100px;"><img [src]="produto.img" class="img-thumbnail"></td>
+        <td style="max-width: 100px;"><img [src]="produto.medias[0].uri" class="img-thumbnail img-fluid"></td>
         <td>{{produto.descricao}}</td>
         <td>{{produto.quantidade}}</td>
         <td>{{produto.valor}}</td>

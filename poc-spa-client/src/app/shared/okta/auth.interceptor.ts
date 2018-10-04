@@ -16,13 +16,16 @@ export class AuthInterceptor implements HttpInterceptor {
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
     // Only add to known domains since we don't want to send our tokens to just anyone.
     // Also, Giphy's API fails when the request includes a token.
-    if (request.urlWithParams.indexOf('localhost') > -1) {
+   if (request.urlWithParams.indexOf('auth') > -1) {
+     console.log("PASSOU NO HANDLE ACCESS");
       const accessToken = await this.oktaAuth.getAccessToken();
-      request = request.clone({
-        setHeaders: {
-          Authorization: 'Bearer ' + accessToken
-        }
-      });
+      if(accessToken){
+        request = request.clone({
+          setHeaders: {
+            Authorization: 'Bearer ' + accessToken
+          }
+        });
+      }  
     }
     return next.handle(request).toPromise();
   }

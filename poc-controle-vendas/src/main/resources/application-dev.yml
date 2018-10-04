@@ -5,6 +5,6 @@ spring:
              password: pocpass
              
 eureka:
-  instance:
-    hostname: localhost
-    non-secure-port: 8762             
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
