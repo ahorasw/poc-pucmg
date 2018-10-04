@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from  '@angular/router'
 import { Product } from '../products/product/product';
 import { CartService } from '../cart/cart.service';
-import { CurrencyPipe } from '@angular/common'
-import { Checkout } from './checkout'
+import { Checkout, CheckoutRetorno } from './checkout'
 import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
+import { CheckoutService } from './checkout.service';
+
 
 
 @Component({
@@ -13,35 +15,50 @@ import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
 })
 export class CheckoutComponent implements OnInit {
   myForm : FormGroup;
-  checkout: Checkout;
+  checkout: Checkout = new Checkout();
   produtos: Product[];
-  constructor(public cartService: CartService, fb: FormBuilder){
-    this.myForm= fb.group({
-        'destinatario' : ['', [Validators.required]],
-        'email' : ['', [Validators.required]],
-        'enderecoEntrega' : ['', [Validators.required]],
-        'codPromocial' : [''],
-        'salvarEndereo' : ['']
-      });
-  }    
+
+  constructor(
+    private cartService: CartService, private fb: FormBuilder, 
+    private checkoutService: CheckoutService,
+    private router: Router
+    ){}    
 
   ngOnInit() {
+
     this.produtos = this.cartService.obterProdutos();
     this.checkout.itens = this.produtos;
+
+    this.myForm = this.fb.group({
+      destinatario : ['', [Validators.required]],
+        email : ['', [Validators.required]],
+        enderecoEntrega : ['', [Validators.required]]
+    })
   }
 
   pagar() {
 
-    this.checkout.destinatario = this.myForm.controls['destinatario'].value;
-    this.checkout.enderecoEntrega = this.myForm.controls['enderecoEntrega'].value;
-    this.checkout.codPromocial = this.myForm.controls['codPromocial'].value;
-    this.checkout.email = this.myForm.controls['email'].value;
-    this.checkout.salvarEndereo = this.myForm.controls['salvarEndereo'].value;
-    console.log('eita ta indo pagar' + this.checkout);
-  }
+    this.checkout.destinatario = this.myForm.value.destinatario;
+    this.checkout.enderecoEntrega = this.myForm.value.enderecoEntrega;
+    this.checkout.email = this.myForm.value.email;
+    this.checkout.codPromocial = '';
+    this.checkout.salvarEndereo = '';
+    console.log('eita ta indo pagar');
+    console.log( this.checkout);
+    this.checkoutService
+      .efetivarPagamento(this.checkout)
+      .subscribe(
+        (res: CheckoutRetorno) => {
+          this.router.navigateByUrl('finalizado/' + res.id);
+          this.cartService.esvaziarCarrinho();
+        },
+        err => {
+          console.log(err)
+          alert('sistema indisponivel no momento!');
+        }
+      );
+      
 
-  onSubmit(value: string): void {  
-    console.log('you submitted value: ', value);  
   }
  
 }

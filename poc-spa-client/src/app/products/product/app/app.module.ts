@@ -15,13 +15,12 @@ import {
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/okta/auth.interceptor';
 import { LoginButtonComponent } from './shared/okta/login-button.component';
-import { FinalizadoModule } from './finalizado/finalizado.module';
 
 registerLocaleData(ptBr)
 
 const oktaConfig = {
   issuer: 'https://dev-549303.oktapreview.com/oauth2/default',
-  redirectUri: 'https://www.ahorasw.rocks/implicit/callback',
+  redirectUri: 'http://localhost:4200/implicit/callback',
   clientId: '0oaga21b914tHUklJ0h7'
 }
 
@@ -37,7 +36,6 @@ const oktaConfig = {
     ErrorsModule,
     CartModule,
     CheckoutModule,
-    FinalizadoModule
     OktaAuthModule.initAuth(oktaConfig)
   ],
   providers: [
