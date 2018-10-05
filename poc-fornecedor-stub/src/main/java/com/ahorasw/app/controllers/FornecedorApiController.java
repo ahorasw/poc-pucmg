@@ -1,5 +1,7 @@
 package com.ahorasw.app.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -72,6 +74,42 @@ public class FornecedorApiController {
 		
 		return new ResponseEntity<>(pedido, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/ordemEntrega",
+			method= RequestMethod.GET,
+	        produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> consultaPedidos(){
+				
+		List<Pedido> pedidos = null;
+		
+		try {
+			pedidos = service.consultaAllPedido();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		
+		
+		return new ResponseEntity<>(pedidos, HttpStatus.OK);
+	}	
+	@RequestMapping(value = "/ordemEntrega/{idOrdem}/{status}",
+			method= RequestMethod.PUT,
+	        produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> atualizaStatusPedido(@PathVariable("idOrdem") Integer idOrdem, @PathVariable("status") Integer status){
+				
+		Pedido pedido = null;
+		
+		try {
+			service.atualizaStatusPedido(idOrdem, status);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_MODIFIED);
+		}
+		
+		
+		return new ResponseEntity<>("Status Atualizado!", HttpStatus.ACCEPTED);
+	}	
+	
 	@RequestMapping(value = "/ordemEntrega/{idOrdem}",
 			method= RequestMethod.DELETE,
 	        produces = MediaType.APPLICATION_JSON_VALUE)

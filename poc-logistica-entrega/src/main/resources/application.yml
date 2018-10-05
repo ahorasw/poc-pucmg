@@ -1,0 +1,29 @@
+logging:
+    level:
+       org.springframework.web: ERROR
+       com.ahorasw.logistica: DEBUG
+    pattern:
+      console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+      file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: ./logistica.log      
+    
+    
+spring:
+   datasource:
+         platform: POSTGRESQL
+         url: jdbc:postgresql://localhost:5432/pocdb
+         username: pocuser
+         password: pocpass        
+   jpa:
+      properties: 
+          hibernate:
+              default_schema: poc
+          
+server: 
+    port: 9001          
+    
+   
+eureka:
+  instance:
+    hostname: localhost
+    non-secure-port: 8761                                        

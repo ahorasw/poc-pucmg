@@ -13,7 +13,7 @@ public class PedidoDTO implements Serializable{
 	private Integer idPedido;
 	private String userId;
 	private String destinatario;
-	private Integer userEnderecoId;
+	private String enderecoEntrega;
     private String codPromocial;
     private List<ItemDTO> items;
     private Double valorTotal;
@@ -45,11 +45,12 @@ public class PedidoDTO implements Serializable{
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Integer getUserEnderecoId() {
-		return userEnderecoId;
+
+	public String getEnderecoEntrega() {
+		return enderecoEntrega;
 	}
-	public void setUserEnderecoId(Integer userEnderecoId) {
-		this.userEnderecoId = userEnderecoId;
+	public void setEnderecoEntrega(String enderecoEntrega) {
+		this.enderecoEntrega = enderecoEntrega;
 	}
 	public String getCodPromocial() {
 		return codPromocial;

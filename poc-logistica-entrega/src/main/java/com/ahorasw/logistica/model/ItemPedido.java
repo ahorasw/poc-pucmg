@@ -2,8 +2,10 @@ package com.ahorasw.logistica.model;
 
 import java.io.Serializable;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "item_pedido", schema="poc")
@@ -11,20 +13,16 @@ public class ItemPedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer    idProduto;
-    private Integer    quantidade;
-
-    public ItemPedido() {
-		super();
-    }
+	private ItemPedidoPk pk = new ItemPedidoPk(); 
+    private Integer  quantidade;
     
-
-	public Integer getIdProduto() {
-		return idProduto;
+    @EmbeddedId
+	public ItemPedidoPk getPk() {
+		return pk;
 	}
 
-	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
+	public void setPk(ItemPedidoPk pk) {
+		this.pk = pk;
 	}
 
 	public Integer getQuantidade() {
@@ -34,5 +32,7 @@ public class ItemPedido implements Serializable {
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
+
+	
 
 }

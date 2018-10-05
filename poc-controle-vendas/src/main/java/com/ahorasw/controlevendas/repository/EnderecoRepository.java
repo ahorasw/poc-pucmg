@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ahorasw.controlevendas.domain.Endereco;
-import com.ahorasw.controlevendas.domain.Usuario;
+import com.ahorasw.controlevendas.model.Endereco;
+import com.ahorasw.controlevendas.model.Usuario;
 
 
 @Repository

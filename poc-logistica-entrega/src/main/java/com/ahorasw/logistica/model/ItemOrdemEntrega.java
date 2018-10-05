@@ -1,5 +1,6 @@
 package com.ahorasw.logistica.model;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -7,18 +8,20 @@ import javax.persistence.Table;
 @Table(name = "item_ordem_entrega", schema="poc")
 public class ItemOrdemEntrega {
 
-    private Integer    idProduto;
+	private ItemOrdemEntregaPk pk = new ItemOrdemEntregaPk(); 
+
     private Integer    quantidade;
 
 
-	public Integer getIdProduto() {
-		return idProduto;
+	@EmbeddedId
+	public ItemOrdemEntregaPk getPk() {
+		return pk;
 	}
 
-	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
+	public void setPk(ItemOrdemEntregaPk pk) {
+		this.pk = pk;
 	}
-
+	
 	public Integer getQuantidade() {
 		return quantidade;
 	}
@@ -26,7 +29,6 @@ public class ItemOrdemEntrega {
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-
 
 
 }

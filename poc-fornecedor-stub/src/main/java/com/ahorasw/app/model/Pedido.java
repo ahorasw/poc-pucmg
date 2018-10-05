@@ -38,6 +38,7 @@ public class Pedido implements Serializable {
 	public Integer getIdPedido() {
 		return idPedido;
 	}
+	
 	public void setIdPedido(Integer idPedido) {
 		this.idPedido = idPedido;
 	}

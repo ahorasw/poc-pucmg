@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.ahorasw.controlevendas.domain.Pedido;
+import com.ahorasw.controlevendas.model.Pedido;
 import com.ahorasw.controlevendas.service.PedidoService;
 import com.ahorasw.controlevendas.service.dto.PedidoDTO;
 
@@ -27,11 +27,11 @@ public class PedidoController {
         this.pedidoService = pedidoService;
     }
     
-    @RequestMapping(value="/pedido", method = RequestMethod.GET)
+    @RequestMapping(value="/admin/pedido", method = RequestMethod.GET)
 	public ResponseEntity<List<Pedido>> getListaPedidos() {
 		
     	Optional<List<Pedido>> pedidos = pedidoService.findAllPedidos();
-    	if(pedidos.isPresent()) {
+    	if(pedidos.isPresent() && !pedidos.get().isEmpty()) {
     		return new ResponseEntity<>(pedidos.get(), HttpStatus.OK); 
     	}else {
     		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedidos nao encontrados");    
@@ -39,18 +39,29 @@ public class PedidoController {
     	
 	}
     
-    @RequestMapping(value="/pedido/status/{status}", method = RequestMethod.GET)
+    @RequestMapping(value="/auth/pedido/{user}", method = RequestMethod.GET)
+	public ResponseEntity<List<Pedido>> getListaPedidosUsuario(@PathVariable String user) {
+		
+    	Optional<List<Pedido>> pedidos = pedidoService.findPedidosUsuario(user);
+    	if(pedidos.isPresent() && !pedidos.get().isEmpty()) {
+    		return new ResponseEntity<>(pedidos.get(), HttpStatus.OK); 
+    	}else {
+    		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedidos nao encontrados");    
+    	}    	
+	}    
+    
+    @RequestMapping(value="/auth/pedido/status/{status}", method = RequestMethod.GET)
 	public ResponseEntity<List<Pedido>> findAllPedidosByStatus(@PathVariable Integer status) {
 		
     	Optional<List<Pedido>> pedidos = pedidoService.findAllPedidosByStatus(status);
-    	if(pedidos.isPresent()) {
+    	if(pedidos.isPresent() && !pedidos.get().isEmpty()) {
     		return new ResponseEntity<>(pedidos.get(), HttpStatus.OK); 
     	}else {
     		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedidos nao encontrados");    
     	}
 	}
     
-	@RequestMapping("/pedido/get-status/{id}")
+	@RequestMapping("/auth/pedido/get-status/{id}")
 	public ResponseEntity<Integer>  getStatus(@PathVariable Integer id) {
     	
 		Optional<Pedido> pedido = pedidoService.findOneById(id);
@@ -63,10 +74,10 @@ public class PedidoController {
     	
 	}
 
-	@RequestMapping(value="/pedido/validar", method = RequestMethod.POST)
+	@RequestMapping(value="/pub/pedido/validar", method = RequestMethod.POST)
 	public ResponseEntity<PedidoDTO> validaPedido(@RequestBody PedidoDTO dto) {
 		
-		Optional<PedidoDTO> pedido = pedidoService.validaPedido(dto);
+		Optional<PedidoDTO> pedido = pedidoService.validaPedido(dto, false);
 		
     	try{
     		if(pedido.isPresent()) 
@@ -75,23 +86,23 @@ public class PedidoController {
     			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Erro na validacao do Pedido");    
     			
     	}catch(Exception e) {
-    		throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Nao foi possivel Efetuar o Pedido!\nErros:\n"+e.getMessage());    
+    		throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Pedido possui erros!\nErros:\n"+e.getMessage());    
 			
 		}
 
 	}
-	@RequestMapping(value="/pedido/efetivar", method = RequestMethod.POST)
-	public ResponseEntity<PedidoDTO> efetivaPedido(@RequestBody PedidoDTO dto) {
+	@RequestMapping(value="/auth/pedido/efetivar", method = RequestMethod.POST)
+	public ResponseEntity<Pedido> efetivaPedido(@RequestBody PedidoDTO dto) {
 		
-		Optional<PedidoDTO> pedido = pedidoService.efetivaPedido(dto);
+		Optional<Pedido> pedido = pedidoService.efetivaPedido(dto);
 		
 		try {
 	    	if(pedido.isPresent()) 
 	    		return new ResponseEntity<>(pedido.get(), HttpStatus.CREATED); 
 	    	else 
-	    		throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Nao foi possivel Efetuar o Pedido");    	    	
+	    		throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Nao foi possivel Efetivar o Pedido");    	    	
 		}catch(Exception e) {
-    		throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Nao foi possivel Efetuar o Pedido!\nErros:\n"+e.getMessage());    
+    		throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Pedido possui erros!\nErros:\n"+e.getMessage());    
 			
 		}
 	}	

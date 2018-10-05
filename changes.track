@@ -1,0 +1,12 @@
+        modified:   .angular-cli.json
+        modified:   src/app/app.component.html
+        modified:   src/app/app.module.ts
+        modified:   src/app/cart/cart-buttom/cart-buttom.component.html
+        modified:   src/app/cart/cart-list/cart-list.component.html
+        modified:   src/app/checkout/checkout.component.ts
+        modified:   src/app/checkout/checkout.service.ts
+        modified:   src/app/products/product/product.component.html
+        modified:   src/app/products/product/product.service.ts
+        modified:   src/app/products/product/product.ts
+        modified:   src/app/shared/okta/auth.interceptor.ts
+        modified:   src/index.html
